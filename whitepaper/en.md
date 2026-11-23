@@ -92,7 +92,7 @@ Two principles guide the design. A machine should hand work back to people befor
 
 Any maker of robots, drones, robot arms or other AI-driven machines can try YOROSIX AI today, at no cost during the evaluation period.
 
-1. **Sign up with a work email** at [yorosix.com](https://yorosix.com). A key is issued as soon as the email is confirmed and the evaluation terms are accepted on screen.
+1. **Sign up with a work email** at [yorosix.com/ai/partners/signup](https://www.yorosix.com/ai/partners/signup). A key is issued as soon as the email is confirmed and the evaluation terms are accepted on screen.
 2. **Run the ROS 2 kit in simulation first.** It ships with a fleet simulation, with or without people in the loop.
 3. **Run it beside your own machines.** It does not touch motor control or your fleet manager.
 4. **Read the relational trust report** for your fleet.
@@ -107,6 +107,6 @@ YOROSIX grows out of more than 15 years of research on cooperative behaviour and
 
 YOROSIX is based in Osaka, Japan, and works worldwide. Its vision is a society in which people and AI-driven machines (robots, drones, vehicles, AI agents) solve problems together.
 
-Founder: Kazutaka Hayashi · Contact: [kazutaka.hayashi@yorosix.com](mailto:kazutaka.hayashi@yorosix.com) · [yorosix.com](https://yorosix.com)
+Founder: Kazutaka Hayashi · Contact: [kazutaka.hayashi@yorosix.com](mailto:kazutaka.hayashi@yorosix.com)
 
 YOROSIX AI is patent pending. The demo in this repository uses a simplified rule and does not contain YOROSIX AI's methods.

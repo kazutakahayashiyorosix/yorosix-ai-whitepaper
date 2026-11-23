@@ -92,7 +92,7 @@ YOROSIX AI は各機械の制御ソフトの横で動き、どのメーカーの
 
 ロボット、ドローン、ロボットアームなど、AIで動く機械のメーカーならどこでも、今日から YOROSIX AI を試せます。評価期間中は費用はかかりません。
 
-1. **仕事用メールで登録します**（[yorosix.com](https://yorosix.com)）。メールの確認と、画面上での評価条件への同意が済むと、すぐにキーが発行されます。
+1. **仕事用メールで登録します**（[yorosix.com/ai/partners/signup](https://www.yorosix.com/ai/partners/signup?lang=ja)）。メールの確認と、画面上での評価条件への同意が済むと、すぐにキーが発行されます。
 2. **ROS 2キットをまずシミュレーションで動かします。** フリートのシミュレーションが付いていて、人を加えた形でも試せます。
 3. **自社の機械の横で動かします。** モーター制御やフリート管理には触れません。
 4. **自社のフリートの関係の信頼レポートを読みます。**
@@ -107,6 +107,6 @@ YOROSIX は、協力行動と社会ネットワークに関する15年以上の�
 
 YOROSIX は大阪を拠点に、世界を相手に活動しています。目指すのは、人とAIで動く機械（ロボット、ドローン、車、AIエージェント）が一緒に問題を解決する社会です。
 
-創業者：林 和孝 · 連絡先：[kazutaka.hayashi@yorosix.com](mailto:kazutaka.hayashi@yorosix.com) · [yorosix.com](https://yorosix.com)
+創業者：林 和孝 · 連絡先：[kazutaka.hayashi@yorosix.com](mailto:kazutaka.hayashi@yorosix.com)
 
 YOROSIX AI は特許出願中です。このリポジトリのデモは単純化した決まりを使っており、YOROSIX AI の方法は含んでいません。

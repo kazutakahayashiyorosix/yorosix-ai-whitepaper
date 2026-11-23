@@ -20,6 +20,8 @@ The demo shows three kinds of single-function robots (a humanoid that opens door
 
 デモには3種類の単機能ロボット（ドアを開けるヒューマノイド・つかむアーム・運ぶ台車）が出てきます。ひとりで働くと、どれも仕事をやり切れません。互いに頼み合い、電池が減ったら人に充電を頼むと、仕事が片付きます。デモの頼む相手の選び方は単純な決まりで、YOROSIX AI の方法（特許出願中）は含んでいません。
 
-Contact / 連絡先: kazutaka.hayashi@yorosix.com · https://yorosix.com
+Try YOROSIX AI / 試用登録: https://www.yorosix.com/ai/partners/signup
+
+Contact / 連絡先: kazutaka.hayashi@yorosix.com
 
 © 2026 YOROSIX. All rights reserved.
