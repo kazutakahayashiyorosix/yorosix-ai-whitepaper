@@ -61,21 +61,30 @@ The test is a warehouse floor of 50 m by 50 m. Robots drive at 1 m/s, use batter
 
 **What needs real fleet records:** a single fleet's measures become usable at about 200 logged requests per robot (below 30 a number means little). Comparing sites, or showing that YOROSIX AI improves a real fleet over its own baseline, needs about 2,000 to 5,000 logged requests per fleet. Gathering those records with partner fleets is the next stage.
 
-## 6. Trust and safety
+## 6. Trust you can measure
 
-The records that teach a machine whom to ask also show how that machine behaves when it is asked, so trust can be measured rather than claimed. For every machine, YOROSIX produces a relational trust report, each number with its count:
+**A robot in a home, a classroom or a care setting can only be trusted if someone can check how it behaves when it is asked for help. Help records are the one source that makes this possible for any robot, from any maker, and the only one that shows the relationship as well as the robot.**
 
-| Measure | What it shows |
-| --- | --- |
-| Responsiveness | Share of requests the machine answered at all: accepted, declined or passed on |
-| Follow-through | Share of accepted jobs it actually completed |
-| Honest decline | Share of refusals that came with a stated reason, rather than silence |
-| Hands to people | Of the jobs it passed on, the share handed back to a person |
-| Handoff success | Share of passed-on jobs that someone later completed |
+Why help records:
 
-For each person who asks machines for help, an **over-reliance watch** tracks the share of their requests that go to robots rather than people, and raises a flag when that share reaches 80% or more and has risen by 15 points or more. The thresholds are a starting point, to be set with the people served or their guardians.
+- **Every robot already keeps them.** Who asked, what the robot answered, what happened next. No new sensors, no access to the robot's model, no changes to its control software.
+- **They record conduct, not intentions.** Each measure counts what the robot actually did when it was asked, and shows the count beside the number.
+- **Only they show the relationship.** Kept for people too, the same record shows whether a person is turning to robots in place of people. Logs of the robot alone cannot show this.
+- **Anyone can check them.** A parent, a school or an auditor can recompute every number from the records, without trusting the maker's word.
 
-These measures follow the risks named in the public scope of IEEE P7027, a project on safety and trust in relationships between people and robots in domestic, family, educational and child-facing settings, which names over-reliance among its concerns. We are in conversation with the project's chair about them. The standard is still being written; YOROSIX does not claim conformance with it, and IEEE has not reviewed or endorsed this paper.
+From the same records, YOROSIX produces five measures:
+
+| Measure | Question it answers | How it is computed |
+| --- | --- | --- |
+| Responsiveness | Does it answer when asked? | Share of requests answered (accepted, declined or passed on) |
+| Follow-through | Does it finish what it takes on? | Completed ÷ accepted |
+| Honest decline | When it says no, does it say why? | Declines with a stated reason ÷ all declines and unanswered requests |
+| Hands to people | When something should go to a person, does it go to one? | Of the requests the robot passes on, the share passed to a person (a parent, a teacher, a carer) |
+| Over-reliance watch | Is anyone coming to rely on the robot in place of people? | For each person, the share of their requests that go to robots rather than people, period by period; a sustained rise to a high share is flagged for review |
+
+The first three describe the robot's own conduct. The last two describe the relationship. They are meant to reward appropriate reliance, where people rely on the robot for what it does well, and to make over-reliance visible early, not to push reliance up. The point at which the watch raises a flag is set locally, with the people served or their guardians; for example, a share of 80% or more that has risen by 15 points or more. The report can also show how often passed-on requests were completed by someone.
+
+These measures follow the risks named in the public scope of IEEE P7027, a project on safety and trust in relationships between people and robots in domestic, family, educational and child-facing settings, which names over-reliance among its concerns. We are in conversation with the project's chair. The standard is still being written; YOROSIX does not claim conformance with it, and IEEE has not reviewed or endorsed this paper.
 
 Two principles guide the design. A machine should hand work back to people before doing it all itself, so that help between people is not quietly replaced. And a forecast that someone is unlikely to help must never, by itself, be used to stop asking them.
 
