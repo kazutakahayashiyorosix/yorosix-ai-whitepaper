@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YOROSIX AI demo: alone vs together</title>
+<style>
+  :root { --bg:#fbfaf7; --fg:#1d1d1b; --muted:#6b6a65; --line:#dcdad3; --panel:#ffffff;
+          --see:#2a7ab8; --grab:#c8742a; --carry:#7a4fb0; --person:#2e8a57; --bad:#c0392b; --accent:#2a7ab8; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#1b1b1a; --fg:#ecebe6; --muted:#a3a29c; --line:#3a3936; --panel:#232321;
+            --see:#5fa8e0; --grab:#e09a52; --carry:#a985d8; --person:#5cbf86; --bad:#e2685a; --accent:#5fa8e0; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif; }
+  main { max-width:1080px; margin:0 auto; padding:20px 16px 40px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 16px; }
+  .bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; }
+  button { font:inherit; padding:6px 14px; border-radius:8px; border:1px solid var(--line); background:var(--panel); color:var(--fg); cursor:pointer; }
+  button.on { border-color:var(--accent); color:var(--accent); font-weight:600; }
+  .lang { margin-left:auto; }
+  .lang a { color:var(--muted); text-decoration:none; margin-left:10px; }
+  .lang a.cur { color:var(--fg); font-weight:600; }
+  .panels { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:760px) { .panels { grid-template-columns:1fr; } }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .panel h2 { font-size:16px; margin:0 0 2px; }
+  .panel p { margin:0 0 8px; color:var(--muted); font-size:13px; min-height:3em; }
+  canvas { width:100%; height:auto; display:block; border-radius:8px; background:var(--bg); }
+  .stats { display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-top:8px; }
+  .stat { text-align:center; }
+  .stat b { display:block; font-size:22px; font-variant-numeric:tabular-nums; }
+  .stat span { font-size:11.5px; color:var(--muted); }
+  .legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:13px; color:var(--muted); }
+  .legend i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
+  .note { margin-top:14px; font-size:13px; color:var(--muted); }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="t-title"></h1>
+  <p class="sub" id="t-sub"></p>
+  <div class="bar">
+    <button id="b-play"></button>
+    <button id="b-x1" class="on">1×</button>
+    <button id="b-x4">4×</button>
+    <button id="b-reset"></button>
+    <div class="lang"><a href="?lang=en" id="l-en">English</a><a href="?lang=ja" id="l-ja">日本語</a></div>
+  </div>
+  <div class="panels">
+    <section class="panel">
+      <h2 id="t-alone"></h2><p id="t-alone-d"></p>
+      <canvas id="c-alone" width="640" height="500"></canvas>
+      <div class="stats" id="s-alone"></div>
+    </section>
+    <section class="panel">
+      <h2 id="t-together"></h2><p id="t-together-d"></p>
+      <canvas id="c-together" width="640" height="500"></canvas>
+      <div class="stats" id="s-together"></div>
+    </section>
+  </div>
+  <div class="legend" id="legend"></div>
+  <p class="note" id="t-note"></p>
+</main>
+<script>
+const LANG = new URLSearchParams(location.search).get('lang') === 'ja' ? 'ja' : 'en';
+const T = {
+  en: {
+    title: 'One machine is small. Together, they finish the job.',
+    sub: 'Every job needs three abilities: seeing it, gripping it, carrying it. Each robot has only one.',
+    alone: 'Each robot alone', aloneD: 'A robot takes a job and tries to finish it by itself. It never asks anyone.',
+    together: 'Robots that ask', togetherD: 'A robot asks another for what it lacks, and asks a person to plug it in when its battery runs low.',
+    play: 'Pause', resume: 'Play', reset: 'Restart',
+    done: 'jobs done', stuck: 'jobs stuck', asksM: 'asks to machines', asksP: 'asks to people', stopped: 'robots stopped',
+    see: 'sees', grab: 'grips', carry: 'carries', person: 'person', drop: 'drop zone', charger: 'charger',
+    askSee: 'Can you find it?', askGrab: 'Can you grip it?', askCarry: 'Can you carry it?',
+    ok: 'On my way', thanks: 'Thanks!', cant: 'I can’t do this part', low: 'Battery low', plug: 'Could you plug me in?', sure: 'Sure',
+    note: 'This demo uses a simple rule for choosing whom to ask: the nearest free one with the missing ability. It shows what working together looks like, not how YOROSIX AI decides. YOROSIX AI is patent pending.',
+    back: 'Read the white paper'
+  },
+  ja: {
+    title: '1台の力は小さい。力を合わせれば、仕事は片付く。',
+    sub: 'どの仕事にも3つの力がいります。見つける、つかむ、運ぶ。どのロボットも1つしか持っていません。',
+    alone: 'それぞれひとりで', aloneD: 'ロボットは仕事を引き取ると、自分だけでやり切ろうとします。誰にも頼みません。',
+    together: '頼み合うロボット', togetherD: '足りない力は他のロボットに頼み、電池が減ったら人に充電を頼みます。',
+    play: '一時停止', resume: '再生', reset: '最初から',
+    done: '完了した仕事', stuck: '止まった仕事', asksM: '機械への依頼', asksP: '人への依頼', stopped: '止まったロボット',
+    see: '見る', grab: 'つかむ', carry: '運ぶ', person: '人', drop: '置き場', charger: '充電器',
+    askSee: '見つけてくれる？', askGrab: 'つかんでくれる？', askCarry: '運んでくれる？',
+    ok: '行きます', thanks: 'ありがとう！', cant: 'ここは自分にはできない', low: '電池が少ない', plug: '充電してくれますか？', sure: 'いいよ',
+    note: 'このデモの頼む相手の選び方は単純な決まり（その力を持つ、空いている一番近い相手）です。力を合わせるとどうなるかを見せるもので、YOROSIX AI の判断の仕方は入っていません。YOROSIX AI は特許出願中です。',
+    back: 'ホワイトペーパーを読む'
+  }
+}[LANG];
+document.documentElement.lang = LANG;
+document.getElementById('l-' + LANG).classList.add('cur');
+for (const [id, k] of [['t-title','title'],['t-sub','sub'],['t-alone','alone'],['t-alone-d','aloneD'],['t-together','together'],['t-together-d','togetherD'],['b-reset','reset']])
+  document.getElementById(id).textContent = T[k];
+document.getElementById('t-note').innerHTML = T.note + ' <a href="' + (LANG === 'ja' ? '../ja/' : '../') + '">' + T.back + ' →</a>';
+
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const COL = () => ({ see: css('--see'), grab: css('--grab'), carry: css('--carry'), person: css('--person'), bad: css('--bad'),
+  fg: css('--fg'), muted: css('--muted'), line: css('--line'), panel: css('--panel') });
+document.getElementById('legend').innerHTML = ['see','grab','carry','person'].map(k =>
+  `<span><i style="background:var(--${k})"></i>${T[k]}</span>`).join('');
+
+// ---------- world ----------
+const W = 320, H = 250, SPEED = 1.1, PERSON_SPEED = 1.3;
+const DROP = { x: 270, y: 20, w: 40, h: 60 }, CHARGER = { x: 22, y: 222 }, HOME = { x: 70, y: 232 };
+const NEED = ['see', 'grab', 'carry'], WORK_T = 40, STUCK_T = 150, SPAWN_T = 170, MAX_JOBS = 5;
+
+function rng(seed) { return () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }; }
+function jobStream() { const r = rng(7), out = []; for (let i = 0; i < 400; i++) out.push({ x: 30 + r() * 220, y: 30 + r() * 170 }); return out; }
+
+function makeWorld(together) {
+  const start = [[60,60,'see'],[200,190,'see'],[140,40,'grab'],[90,170,'grab'],[230,110,'carry'],[40,120,'carry']];
+  return {
+    together, tick: 0, nextJob: 0, stream: jobStream(),
+    robots: start.map(([x, y, kind], i) => ({ id: i, kind, x, y, bat: [45, 85, 70, 55, 40, 90][i], state: 'idle', job: null, t: 0 })),
+    person: { x: HOME.x, y: HOME.y, state: 'home', target: null, t: 0 },
+    jobs: [], fx: [], stats: { done: 0, stuck: 0, asksM: 0, asksP: 0 }, chargeQueue: []
+  };
+}
+const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+function moveTo(o, p, sp) { const d = dist(o, p); if (d <= sp) { o.x = p.x; o.y = p.y; return true; } o.x += (p.x - o.x) / d * sp; o.y += (p.y - o.y) / d * sp; return false; }
+function say(w, who, text, kind, from) { w.fx.push({ who, text, kind, from, t: 0, life: 90 }); }
+const LOW = 35;
+const free = r => r.state === 'idle' && r.bat >= LOW;
+
+function step(w) {
+  w.tick++;
+  // new job
+  if (w.tick % SPAWN_T === 1 && w.jobs.filter(j => !j.end).length < MAX_JOBS) {
+    const p = w.stream[w.nextJob++ % w.stream.length];
+    w.jobs.push({ x: p.x, y: p.y, stage: 0, owner: null, helper: null, carried: false, end: null, t: 0, last: null });
+  }
+  for (const j of w.jobs) {
+    if (j.end) { j.t++; continue; }
+    if (w.together) {
+      if (j.helper === null) {
+        const need = NEED[j.stage];
+        const cands = w.robots.filter(r => r.kind === need && free(r));
+        if (cands.length) {
+          const asker = j.last !== null ? w.robots[j.last] : null;
+          const h = cands.reduce((a, b) => dist(a, j) < dist(b, j) ? a : b);
+          j.helper = h.id; h.state = 'toJob'; h.job = j;
+          if (asker && asker.id !== h.id) {
+            w.stats.asksM++;
+            say(w, asker, need === 'see' ? T.askSee : need === 'grab' ? T.askGrab : T.askCarry, 'ask', null);
+            say(w, h, T.ok, 'reply', asker);
+          }
+        }
+      }
+    } else if (j.owner === null) {
+      const idle = w.robots.filter(free);
+      if (idle.length) { const o = idle.reduce((a, b) => dist(a, j) < dist(b, j) ? a : b); j.owner = o.id; o.state = 'toJob'; o.job = j; }
+    }
+  }
+  for (const r of w.robots) robotStep(w, r);
+  personStep(w);
+  w.fx = w.fx.filter(f => ++f.t < f.life);
+  w.jobs = w.jobs.filter(j => !j.end || j.t < 140);
+}
+
+function robotStep(w, r) {
+  const j = r.job;
+  const drain = v => { r.bat = Math.max(0, r.bat - v); if (r.bat === 0 && r.state !== 'charging') { if (j && !j.end) releaseJob(w, r, j); r.state = 'stopped'; } };
+  switch (r.state) {
+    case 'idle':
+      if (r.bat < LOW) { r.state = 'toCharger'; say(w, r, T.low, 'warn'); }
+      break;
+    case 'toJob':
+      if (w.together && r.bat < 20) { releaseJob(w, r, j); r.state = 'toCharger'; say(w, r, T.low, 'warn'); break; }
+      if (moveTo(r, { x: j.x + (r.kind === 'grab' ? -10 : r.kind === 'carry' ? 10 : 0), y: j.y + 12 }, SPEED)) { r.state = 'work'; r.t = 0; }
+      drain(0.05);
+      break;
+    case 'work': {
+      const need = NEED[j.stage];
+      if (r.kind !== need) { // alone: cannot do this part
+        if (r.t === 0) say(w, r, T.cant, 'warn');
+        if (++r.t > STUCK_T) { j.end = 'stuck'; j.t = 0; w.stats.stuck++; r.state = 'idle'; r.job = null; }
+        break;
+      }
+      drain(0.03);
+      if (++r.t >= WORK_T) {
+        if (need === 'carry') { r.state = 'toDrop'; j.carried = true; }
+        else { j.stage++; r.t = 0; j.last = r.id;
+          if (w.together) { j.helper = null; r.state = 'idle'; r.job = null; } }
+      }
+      break;
+    }
+    case 'toDrop':
+      if (moveTo(r, { x: DROP.x + DROP.w / 2, y: DROP.y + DROP.h / 2 }, SPEED * 0.8)) {
+        j.end = 'done'; j.t = 0; w.stats.done++; r.state = 'idle'; r.job = null;
+        if (w.together) say(w, r, T.thanks, 'thanks');
+      } else { j.x = r.x; j.y = r.y - 8; }
+      drain(0.05);
+      break;
+    case 'toCharger':
+      if (moveTo(r, { x: CHARGER.x + 14 + (r.id % 3) * 12, y: CHARGER.y - 6 - Math.floor(r.id / 3) * 14 }, SPEED)) {
+        r.state = 'waitCharge'; r.t = 0;
+        if (w.together) { w.chargeQueue.push(r.id); w.stats.asksP++; say(w, r, T.plug, 'ask'); }
+      }
+      drain(0.03);
+      break;
+    case 'waitCharge':
+      r.t++;
+      if (!w.together && r.t % 300 === 1) say(w, r, T.low, 'warn');
+      if (!w.together) drain(0.004);
+      break;
+    case 'charging':
+      r.bat = Math.min(100, r.bat + 0.6);
+      if (r.bat >= 100) r.state = 'idle';
+      break;
+  }
+}
+function releaseJob(w, r, j) { if (w.together) { j.helper = null; } else { j.end = 'stuck'; j.t = 0; w.stats.stuck++; } r.job = null; }
+
+function personStep(w) {
+  const p = w.person;
+  if (p.state === 'home' && w.chargeQueue.length) { p.target = w.robots[w.chargeQueue.shift()]; p.state = 'go'; say(w, p, T.sure, 'reply', p.target); }
+  else if (p.state === 'go') { if (moveTo(p, { x: p.target.x + 8, y: p.target.y + 10 }, PERSON_SPEED)) { p.state = 'plug'; p.t = 0; } }
+  else if (p.state === 'plug') { if (++p.t > 30) { p.target.state = 'charging'; p.state = 'back'; } }
+  else if (p.state === 'back') { if (moveTo(p, HOME, PERSON_SPEED)) p.state = 'home'; }
+}
+
+// ---------- drawing ----------
+function draw(w, ctx) {
+  const C = COL(), s = ctx.canvas.width / W;
+  ctx.setTransform(s, 0, 0, s, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = C.line; ctx.lineWidth = 0.5;
+  for (let x = 20; x < W; x += 20) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (let y = 20; y < H; y += 20) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+  ctx.font = '7px sans-serif'; ctx.textAlign = 'center';
+  ctx.strokeStyle = C.muted; ctx.lineWidth = 1; ctx.setLineDash([3, 2]);
+  ctx.strokeRect(DROP.x, DROP.y, DROP.w, DROP.h); ctx.setLineDash([]);
+  ctx.fillStyle = C.muted; ctx.fillText(T.drop, DROP.x + DROP.w / 2, DROP.y + DROP.h + 9);
+  ctx.fillStyle = C.fg; ctx.font = 'bold 12px sans-serif'; ctx.fillText('⚡', CHARGER.x, CHARGER.y + 4);
+  ctx.font = '7px sans-serif'; ctx.fillStyle = C.muted; ctx.fillText(T.charger, CHARGER.x, CHARGER.y + 16);
+  for (const j of w.jobs) {
+    const a = j.end ? Math.max(0, 1 - j.t / 140) : 1;
+    ctx.globalAlpha = a;
+    if (j.end === 'stuck') { ctx.strokeStyle = C.bad; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(j.x - 5, j.y - 5); ctx.lineTo(j.x + 5, j.y + 5); ctx.moveTo(j.x + 5, j.y - 5); ctx.lineTo(j.x - 5, j.y + 5); ctx.stroke(); }
+    else if (j.stage === 0 && !j.end) { ctx.fillStyle = C.muted; ctx.font = 'bold 11px sans-serif'; ctx.fillText('?', j.x, j.y + 4); }
+    else { ctx.fillStyle = j.end === 'done' ? C.person : '#b8935a'; ctx.fillRect(j.x - 5, j.y - 5, 10, 10); ctx.strokeStyle = C.fg; ctx.lineWidth = 0.6; ctx.strokeRect(j.x - 5, j.y - 5, 10, 10); }
+    ctx.globalAlpha = 1;
+  }
+  for (const f of w.fx) if (f.from) {
+    ctx.strokeStyle = C.muted; ctx.setLineDash([2, 2]); ctx.lineWidth = 0.8; ctx.globalAlpha = 1 - f.t / f.life;
+    ctx.beginPath(); ctx.moveTo(f.from.x, f.from.y); ctx.lineTo(f.who.x, f.who.y); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+  }
+  for (const r of w.robots) drawRobot(ctx, r, C);
+  const p = w.person;
+  ctx.fillStyle = C.person; ctx.beginPath(); ctx.arc(p.x, p.y - 7, 3.2, 0, 7); ctx.fill();
+  ctx.fillRect(p.x - 3, p.y - 3, 6, 9);
+  for (const f of w.fx) bubble(ctx, f, C);
+}
+function drawRobot(ctx, r, C) {
+  const c = C[r.kind]; ctx.globalAlpha = r.state === 'stopped' || (r.state === 'waitCharge') ? 0.45 : 1;
+  ctx.fillStyle = c; ctx.strokeStyle = c; ctx.lineWidth = 1.5;
+  if (r.kind === 'see') { ctx.beginPath(); ctx.arc(r.x, r.y, 7, 0, 7); ctx.fill(); ctx.fillStyle = C.panel; ctx.beginPath(); ctx.arc(r.x, r.y, 2.6, 0, 7); ctx.fill(); }
+  else if (r.kind === 'grab') { ctx.fillRect(r.x - 6, r.y - 6, 12, 12); ctx.beginPath(); ctx.moveTo(r.x - 4, r.y - 6); ctx.lineTo(r.x - 7, r.y - 11); ctx.moveTo(r.x + 4, r.y - 6); ctx.lineTo(r.x + 7, r.y - 11); ctx.stroke(); }
+  else { ctx.fillRect(r.x - 9, r.y - 5, 18, 9); ctx.fillStyle = C.fg; ctx.beginPath(); ctx.arc(r.x - 5, r.y + 5, 2, 0, 7); ctx.arc(r.x + 5, r.y + 5, 2, 0, 7); ctx.fill(); }
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = C.line; ctx.fillRect(r.x - 8, r.y + 9, 16, 2.2);
+  ctx.fillStyle = r.bat < LOW ? C.bad : C.person; ctx.fillRect(r.x - 8, r.y + 9, 16 * r.bat / 100, 2.2);
+}
+function bubble(ctx, f, C) {
+  const a = Math.min(1, (f.life - f.t) / 20); ctx.globalAlpha = a;
+  ctx.font = '7.5px sans-serif'; const tw = ctx.measureText(f.text).width + 8;
+  let x = Math.min(Math.max(f.who.x, tw / 2 + 2), W - tw / 2 - 2), y = f.who.y - 18;
+  if (y < 8) y = f.who.y + 26;
+  ctx.fillStyle = f.kind === 'warn' ? C.bad : f.kind === 'thanks' ? C.person : C.panel;
+  ctx.strokeStyle = f.kind === 'ask' || f.kind === 'reply' ? C.fg : 'transparent'; ctx.lineWidth = 0.6;
+  ctx.beginPath(); ctx.roundRect(x - tw / 2, y - 7, tw, 11, 4); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = f.kind === 'warn' || f.kind === 'thanks' ? '#ffffff' : C.fg; ctx.textAlign = 'center'; ctx.fillText(f.text, x, y + 1.5);
+  ctx.globalAlpha = 1;
+}
+function stats(w, el) {
+  const stopped = w.robots.filter(r => r.state === 'stopped' || (!w.together && r.state === 'waitCharge')).length;
+  const rows = [[w.stats.done, T.done], [w.stats.stuck, T.stuck], [w.together ? w.stats.asksM + ' / ' + w.stats.asksP : '0 / 0', T.asksM + ' / ' + T.asksP], [stopped, T.stopped]];
+  el.innerHTML = rows.map(([v, k]) => `<div class="stat"><b>${v}</b><span>${k}</span></div>`).join('');
+}
+
+// ---------- loop ----------
+let A, B, running = true, speed = 1;
+const ca = document.getElementById('c-alone').getContext('2d'), cb = document.getElementById('c-together').getContext('2d');
+function reset() { A = makeWorld(false); B = makeWorld(true); }
+function frame() {
+  if (running) for (let i = 0; i < speed; i++) { step(A); step(B); }
+  draw(A, ca); draw(B, cb); stats(A, document.getElementById('s-alone')); stats(B, document.getElementById('s-together'));
+  requestAnimationFrame(frame);
+}
+const play = document.getElementById('b-play'); play.textContent = T.play;
+play.onclick = () => { running = !running; play.textContent = running ? T.play : T.resume; };
+document.getElementById('b-reset').onclick = reset;
+for (const [id, v] of [['b-x1', 1], ['b-x4', 4]]) document.getElementById(id).onclick = e => {
+  speed = v; document.querySelectorAll('#b-x1,#b-x4').forEach(b => b.classList.remove('on')); e.target.classList.add('on'); };
+reset(); frame();
+</script>
+</body>
+</html>

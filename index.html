@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YOROSIX AI: Machines That Work Together</title>
+<meta name="description" content="One machine is small. Machines that rely on each other, and on people, can do together what none can do alone.">
+<meta property="og:title" content="YOROSIX AI: Machines That Work Together">
+<meta property="og:description" content="One machine is small. Machines that rely on each other, and on people, can do together what none can do alone.">
+<style>
+  :root { --bg:#fbfaf7; --fg:#1d1d1b; --muted:#6b6a65; --line:#dcdad3; --accent:#2a7ab8; --card:#ffffff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1b1b1a; --fg:#ecebe6; --muted:#a3a29c; --line:#3a3936; --accent:#5fa8e0; --card:#232321; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.75 -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:28px 16px 64px; }
+  nav { display:flex; justify-content:space-between; font-size:14px; margin-bottom:28px; }
+  nav a { color:var(--muted); text-decoration:none; margin-left:12px; } nav a.cur { color:var(--fg); font-weight:600; }
+  h1 { font-size:32px; line-height:1.25; margin:0 0 8px; }
+  h2 { font-size:22px; margin:44px 0 10px; padding-top:12px; border-top:1px solid var(--line); }
+  a { color:var(--accent); }
+  table { border-collapse:collapse; width:100%; font-size:15px; margin:16px 0; }
+  th, td { border-bottom:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  img { max-width:100%; height:auto; border-radius:8px; border:1px solid var(--line); background:#fff; }
+  .demo { display:block; text-align:center; padding:14px; border:1px solid var(--accent); border-radius:10px; font-weight:600; text-decoration:none; margin:16px 0; background:var(--card); }
+  em { color:var(--muted); font-style:normal; }
+  .wrap { overflow-x:auto; }
+</style>
+</head>
+<body>
+<main>
+<nav><span>YOROSIX</span><span><a href="./" class="cur">English</a><a href="ja/" class="">日本語</a></span></nav>
+<h1 id="yorosix-ai-machines-that-work-together">YOROSIX AI: Machines
+That Work Together</h1>
+<p><em>White paper · November 2026 · YOROSIX, Osaka, Japan · Patent
+pending</em></p>
+<p><strong>One machine is small. Machines that can rely on each other,
+and on people, can do together what none of them can do
+alone.</strong></p>
+<h2 id="1-alone-every-one-of-us-is-small">1. Alone, every one of us is
+small</h2>
+<p>No person can build a house, run a hospital or put out a fire alone.
+People have done these things for thousands of years by finding someone
+who can do what they cannot, asking, and helping in return. One person's
+strength is small; people who rely on each other are capable of almost
+anything.</p>
+<p>That ability, to know your own limits and turn to others, is what we
+call sociality.</p>
+<h2 id="2-machines-today-work-alone">2. Machines today work alone</h2>
+<p>Robots, drones, robot arms and AI agents grow more capable every
+year, but almost all of them still work alone. When a job is beyond
+them, they stop, or wait for a person to step in.</p>
+<p>Most machines in the real world do one thing. A camera robot sees but
+cannot lift. An arm grips but cannot move. A cart moves but cannot see.
+None of them can finish a whole job alone, and none of them can plug
+itself into a charger that needs a human hand.</p>
+<p>Making each machine smarter does not change this. A smarter cart is
+still a cart. What is missing is not intelligence but the ability to
+rely on others.</p>
+<h2 id="3-what-yorosix-ai-does">3. What YOROSIX AI does</h2>
+<p>YOROSIX AI gives machines sociality. A machine that runs it can:</p>
+<ul>
+<li><strong>ask for what it lacks:</strong> find another machine, or a
+person, who can do the part it cannot;</li>
+<li><strong>take a job on, or pass it on</strong> to someone better
+placed;</li>
+<li><strong>decline honestly</strong>, with a reason, instead of going
+silent;</li>
+<li><strong>ask a person</strong> when only a person can help, such as
+plugging in a charger or opening a door;</li>
+<li><strong>say thanks</strong>, and remember who helped.</li>
+</ul>
+<p>Single-function machines then complement each other. A group of
+simple machines, with people in the loop where needed, solves problems
+that no single machine could, the way people always have.</p>
+<p>YOROSIX AI runs beside each machine's own control software and works
+with machines from any maker. It does not drive motors or replace a
+fleet manager.</p>
+<p><strong>Knowing whom to ask is the hard part.</strong> A machine has
+to judge who is free, who is able, and who is actually likely to say
+yes. YOROSIX AI learns that judgement from records of how people help
+each other: who takes a request on, who passes it on, who declines and
+why. How those records are turned into judgements that machines can use
+is the core of what we have built, and the part we keep to ourselves. If
+you want to know more, <a href="#9-about-yorosix">ask us</a>.</p>
+<h2 id="4-see-it-run">4. See it run</h2>
+<p><a class="demo" href="demo/?lang=en">Open the demo →</a></p>
+<p>Three kinds of single-function robots share a floor: one that sees,
+one that grips, one that carries. A job needs all three. On the left,
+each robot works alone. On the right, the robots ask each other for what
+they lack, and ask a person to plug them in when their battery runs
+low.</p>
+<p>The demo uses a simple rule for choosing whom to ask (the nearest one
+who has the missing ability). It shows what working together looks like,
+not how YOROSIX AI decides.</p>
+<h2 id="5-evidence-so-far">5. Evidence so far</h2>
+<p><strong>In simulation, robots using YOROSIX AI finished more jobs
+than standard methods at every fleet size, with about a third of the
+messages an auction needs.</strong></p>
+<p>The test is a warehouse floor of 50 m by 50 m. Robots drive at 1 m/s,
+use battery, go to a charger when low, and may decline a job because
+they are busy, low on battery or unwilling. How willing each robot is
+comes from people's measured responses to handoffs in public GitHub
+data. A new job is first noticed by one robot, which must hand it to
+another within radio range (25 m). Every method saw the same jobs and
+the same robots: 300 jobs, 3 runs each.</p>
+<p><img src="whitepaper/chart_en.svg"
+alt="Share of jobs completed by method and fleet size" /></p>
+<div class="wrap"><table>
+<thead>
+<tr class="header">
+<th>Method, 30 robots (mean of 3 runs)</th>
+<th>Jobs completed</th>
+<th>Messages per job</th>
+<th>Jobs abandoned half way</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>YOROSIX AI</td>
+<td>50%</td>
+<td>6.3</td>
+<td>44</td>
+</tr>
+<tr class="even">
+<td>Auction</td>
+<td>44%</td>
+<td>21.8</td>
+<td>74</td>
+</tr>
+<tr class="odd">
+<td>Nearest robot</td>
+<td>41%</td>
+<td>7.3</td>
+<td>60</td>
+</tr>
+<tr class="even">
+<td>Ask everyone at once</td>
+<td>18%</td>
+<td>15.7</td>
+<td>24 (it hands out far fewer jobs)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>What can be said now, without deployment data:</strong> on a
+simulated floor with willingness drawn from real human handoff data,
+choosing whom to ask from a shared record of cooperation beats auctions,
+nearest-robot and broadcast, with fewer messages. The simulation is
+kinematic: it has no physics, collisions or real sensors.</p>
+<p><strong>What needs real fleet records:</strong> a single fleet's
+measures become usable at about 200 logged requests per robot (below 30
+a number means little). Comparing sites, or showing that YOROSIX AI
+improves a real fleet over its own baseline, needs about 2,000 to 5,000
+logged requests per fleet. Gathering those records with partner fleets
+is the next stage.</p>
+<h2 id="6-trust-and-safety">6. Trust and safety</h2>
+<p>The records that teach a machine whom to ask also show how that
+machine behaves when it is asked, so trust can be measured rather than
+claimed. For every machine, YOROSIX produces a relational trust report,
+each number with its count:</p>
+<div class="wrap"><table>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Responsiveness</td>
+<td>Share of requests the machine answered at all: accepted, declined or
+passed on</td>
+</tr>
+<tr class="even">
+<td>Follow-through</td>
+<td>Share of accepted jobs it actually completed</td>
+</tr>
+<tr class="odd">
+<td>Honest decline</td>
+<td>Share of refusals that came with a stated reason, rather than
+silence</td>
+</tr>
+<tr class="even">
+<td>Hands to people</td>
+<td>Of the jobs it passed on, the share handed back to a person</td>
+</tr>
+<tr class="odd">
+<td>Handoff success</td>
+<td>Share of passed-on jobs that someone later completed</td>
+</tr>
+</tbody>
+</table></div>
+<p>For each person who asks machines for help, an <strong>over-reliance
+watch</strong> tracks the share of their requests that go to robots
+rather than people, and raises a flag when that share reaches 80% or
+more and has risen by 15 points or more. The thresholds are a starting
+point, to be set with the people served or their guardians.</p>
+<p>These measures follow the risks named in the public scope of IEEE
+P7027, a project on safety and trust in relationships between people and
+robots in domestic, family, educational and child-facing settings, which
+names over-reliance among its concerns. We are in conversation with the
+project's chair about them. The standard is still being written; YOROSIX
+does not claim conformance with it, and IEEE has not reviewed or
+endorsed this paper.</p>
+<p>Two principles guide the design. A machine should hand work back to
+people before doing it all itself, so that help between people is not
+quietly replaced. And a forecast that someone is unlikely to help must
+never, by itself, be used to stop asking them.</p>
+<h2 id="7-try-it">7. Try it</h2>
+<p>Any maker of robots, drones, robot arms or other AI-driven machines
+can try YOROSIX AI today, at no cost during the evaluation period.</p>
+<ol type="1">
+<li><strong>Sign up with a work email</strong> at <a
+href="https://yorosix.com">yorosix.com</a>. A key is issued as soon as
+the email is confirmed and the evaluation terms are accepted on
+screen.</li>
+<li><strong>Run the ROS 2 kit in simulation first.</strong> It ships
+with a fleet simulation, with or without people in the loop.</li>
+<li><strong>Run it beside your own machines.</strong> It does not touch
+motor control or your fleet manager.</li>
+<li><strong>Read the relational trust report</strong> for your
+fleet.</li>
+</ol>
+<p>The evaluation key works for three months. A non-binding letter of
+intent (LOI) is the only thing we ask in return for going further: it
+states interest, commits no money, and gives you first access to
+YOROSIX's training data as it accumulates, plus a longer trial.</p>
+<h2 id="8-research-basis">8. Research basis</h2>
+<p>YOROSIX grows out of more than 15 years of research on cooperative
+behaviour and social networks, which we call Cooperative Social AI: the
+social decision layer that sits above a machine's physical control. More
+than ten manuscripts are under peer review at international journals,
+and several are available as preprints. They cover how help travels
+between people, how cooperation records become training data without
+exposing who did what, robot fleets that ask each other for help, and
+the ethics of machines that forecast or encourage human cooperation.</p>
+<h2 id="9-about-yorosix">9. About YOROSIX</h2>
+<p>YOROSIX is based in Osaka, Japan, and works worldwide. Its vision is
+a society in which people and AI-driven machines (robots, drones,
+vehicles, AI agents) solve problems together.</p>
+<p>Founder: Kazutaka Hayashi · Contact: <a
+href="mailto:kazutaka.hayashi@yorosix.com"><span>kazutaka.hayashi@yorosix.com</span></a>
+· <a href="https://yorosix.com">yorosix.com</a></p>
+<p>YOROSIX AI is patent pending. The demo in this repository uses a
+simplified rule and does not contain YOROSIX AI's methods.</p>
+
+</main>
+</body>
+</html>

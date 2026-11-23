@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" role="img" aria-label="YOROSIX AI completes the most jobs at every fleet size" font-family="-apple-system, Segoe UI, Hiragino Sans, Noto Sans JP, sans-serif" font-size="11.5">
+<rect width="760" height="340" fill="#ffffff"/>
+<text x="40" y="28" font-size="15" font-weight="600" fill="#1d1d1b">YOROSIX AI completes the most jobs at every fleet size</text>
+<text x="40" y="48" fill="#6b6a65">Share of 300 jobs completed, mean of 3 runs, simulated warehouse</text>
+<rect x="40" y="64" width="12" height="12" rx="2" fill="#2a7ab8" fill-opacity="1.00"/>
+<text x="58" y="75" fill="#1d1d1b" font-weight="600">YOROSIX AI</text>
+<rect x="176" y="64" width="12" height="12" rx="2" fill="#9b9a93" fill-opacity="0.70"/>
+<text x="194" y="75" fill="#1d1d1b">Auction</text>
+<rect x="312" y="64" width="12" height="12" rx="2" fill="#9b9a93" fill-opacity="0.55"/>
+<text x="330" y="75" fill="#1d1d1b">Nearest robot</text>
+<rect x="448" y="64" width="12" height="12" rx="2" fill="#9b9a93" fill-opacity="0.40"/>
+<text x="466" y="75" fill="#1d1d1b">Random</text>
+<rect x="584" y="64" width="12" height="12" rx="2" fill="#9b9a93" fill-opacity="0.25"/>
+<text x="602" y="75" fill="#1d1d1b">Ask everyone</text>
+<line x1="40" x2="720" y1="300" y2="300" stroke="#b9b7b0"/>
+<rect x="63.3" y="183.7" width="30" height="116.3" rx="2" fill="#2a7ab8" fill-opacity="1.00"/>
+<text x="78.3" y="177.7" text-anchor="middle" font-size="10.5" fill="#1d1d1b" font-weight="600">35%</text>
+<rect x="99.3" y="202.7" width="30" height="97.3" rx="2" fill="#9b9a93" fill-opacity="0.70"/>
+<text x="114.3" y="196.7" text-anchor="middle" font-size="10.5" fill="#6b6a65">29%</text>
+<rect x="135.3" y="196.3" width="30" height="103.7" rx="2" fill="#9b9a93" fill-opacity="0.55"/>
+<text x="150.3" y="190.3" text-anchor="middle" font-size="10.5" fill="#6b6a65">31%</text>
+<rect x="171.3" y="198.7" width="30" height="101.3" rx="2" fill="#9b9a93" fill-opacity="0.40"/>
+<text x="186.3" y="192.7" text-anchor="middle" font-size="10.5" fill="#6b6a65">30%</text>
+<rect x="207.3" y="244.3" width="30" height="55.7" rx="2" fill="#9b9a93" fill-opacity="0.25"/>
+<text x="222.3" y="238.3" text-anchor="middle" font-size="10.5" fill="#6b6a65">17%</text>
+<text x="150.3" y="322" text-anchor="middle" font-size="13" fill="#1d1d1b">10 robots</text>
+<rect x="290.0" y="132.0" width="30" height="168.0" rx="2" fill="#2a7ab8" fill-opacity="1.00"/>
+<text x="305.0" y="126.0" text-anchor="middle" font-size="10.5" fill="#1d1d1b" font-weight="600">50%</text>
+<rect x="326.0" y="154.3" width="30" height="145.7" rx="2" fill="#9b9a93" fill-opacity="0.70"/>
+<text x="341.0" y="148.3" text-anchor="middle" font-size="10.5" fill="#6b6a65">44%</text>
+<rect x="362.0" y="163.3" width="30" height="136.7" rx="2" fill="#9b9a93" fill-opacity="0.55"/>
+<text x="377.0" y="157.3" text-anchor="middle" font-size="10.5" fill="#6b6a65">41%</text>
+<rect x="398.0" y="166.0" width="30" height="134.0" rx="2" fill="#9b9a93" fill-opacity="0.40"/>
+<text x="413.0" y="160.0" text-anchor="middle" font-size="10.5" fill="#6b6a65">40%</text>
+<rect x="434.0" y="239.7" width="30" height="60.3" rx="2" fill="#9b9a93" fill-opacity="0.25"/>
+<text x="449.0" y="233.7" text-anchor="middle" font-size="10.5" fill="#6b6a65">18%</text>
+<text x="377.0" y="322" text-anchor="middle" font-size="13" fill="#1d1d1b">30 robots</text>
+<rect x="516.7" y="117.3" width="30" height="182.7" rx="2" fill="#2a7ab8" fill-opacity="1.00"/>
+<text x="531.7" y="111.3" text-anchor="middle" font-size="10.5" fill="#1d1d1b" font-weight="600">55%</text>
+<rect x="552.7" y="140.0" width="30" height="160.0" rx="2" fill="#9b9a93" fill-opacity="0.70"/>
+<text x="567.7" y="134.0" text-anchor="middle" font-size="10.5" fill="#6b6a65">48%</text>
+<rect x="588.7" y="164.3" width="30" height="135.7" rx="2" fill="#9b9a93" fill-opacity="0.55"/>
+<text x="603.7" y="158.3" text-anchor="middle" font-size="10.5" fill="#6b6a65">41%</text>
+<rect x="624.7" y="163.3" width="30" height="136.7" rx="2" fill="#9b9a93" fill-opacity="0.40"/>
+<text x="639.7" y="157.3" text-anchor="middle" font-size="10.5" fill="#6b6a65">41%</text>
+<rect x="660.7" y="244.0" width="30" height="56.0" rx="2" fill="#9b9a93" fill-opacity="0.25"/>
+<text x="675.7" y="238.0" text-anchor="middle" font-size="10.5" fill="#6b6a65">17%</text>
+<text x="603.7" y="322" text-anchor="middle" font-size="13" fill="#1d1d1b">100 robots</text>
+</svg>
