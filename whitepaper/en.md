@@ -14,7 +14,7 @@ That ability, to know your own limits and turn to others, is what we call social
 
 Robots, drones, robot arms and AI agents grow more capable every year, but almost all of them still work alone. When a job is beyond them, they stop, or wait for a person to step in.
 
-Most machines in the real world do one thing. A cart moves but cannot grip. An arm grips but cannot move. A unit that opens doors can do nothing else. None of them can finish a whole job alone, and none of them can plug itself into a charger that needs a human hand.
+Most machines in the real world do one thing. A cart moves but cannot grip. An arm grips but cannot move. A humanoid opens doors but is not built to haul loads. None of them can finish a whole job alone, and none of them can plug itself into a charger that needs a human hand.
 
 Making each machine smarter does not change this. A smarter cart is still a cart. What is missing is not intelligence but the ability to rely on others.
 
@@ -38,7 +38,7 @@ YOROSIX AI runs beside each machine's own control software and works with machin
 
 [**Open the demo →**](../demo/)
 
-Three kinds of single-function robots share a floor: one that opens doors, one that grips, one that carries. Every job sits behind a closed door and needs all three. On the left, each robot works alone. On the right, the robots ask each other for what they lack, and ask a person to plug them in when their battery runs low.
+Three kinds of single-function robots share a floor: a humanoid that opens doors, an arm that grips, a cart that carries. Every job sits behind a closed door and needs all three. On the left, each robot works alone. On the right, the robots ask each other for what they lack, and ask a person to plug them in when their battery runs low.
 
 The demo uses a simple rule for choosing whom to ask (the nearest one who has the missing ability). It shows what working together looks like, not how YOROSIX AI decides.
 
