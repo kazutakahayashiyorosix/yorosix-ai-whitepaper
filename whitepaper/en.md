@@ -32,7 +32,7 @@ Single-function machines then complement each other. A group of simple machines,
 
 YOROSIX AI runs beside each machine's own control software and works with machines from any maker. It does not drive motors or replace a fleet manager.
 
-**Knowing whom to ask is the hard part.** A machine has to judge who is free, who is able, and who is actually likely to say yes. YOROSIX AI learns that judgement from records of how people help each other: who takes a request on, who passes it on, who declines and why. How those records are turned into judgements that machines can use is the core of what we have built, and the part we keep to ourselves. If you want to know more, [ask us](#9-about-yorosix).
+**Knowing whom to ask is the hard part.** A machine has to judge who is free, who is able, and who is actually likely to say yes. YOROSIX AI learns that judgement from records of how people help each other: who takes a request on, who passes it on, who declines and why. How those records are turned into judgements that machines can use is the core of what we have built, and the part we keep to ourselves. If you want to know more, [ask us](#10-about-yorosix).
 
 ## 4. See it run
 
@@ -88,7 +88,19 @@ These measures follow the risks named in the public scope of IEEE P7027, a proje
 
 Two principles guide the design. A machine should hand work back to people before doing it all itself, so that help between people is not quietly replaced. And a forecast that someone is unlikely to help must never, by itself, be used to stop asking them.
 
-## 7. Try it
+## 7. Public welfare for a society of machines
+
+In a human society, each person's freedom is respected, yet when one person's actions would harm the safety or freedom of others, they are adjusted for the good of the whole. As machines come to rely on each other and on people, a society of machines needs the same idea. YOROSIX AI puts it in one sentence and five rules.
+
+> **YOROSIX AI respects the purpose of each machine, and adjusts its actions for the good of the whole whenever that purpose would harm the safety or freedom of other machines or people.**
+
+1. **Stop harm:** Even a requested task is checked and stopped by peers if it puts people or other machines at risk.
+2. **Protect the worst-off:** Gains from cooperation are shared by contribution, while raising the share of those in the weakest position.
+3. **Spread the load:** When requests pile up on the same person or machine, notice it and spread them out.
+4. **Keep people's role:** Even when a machine can do a task, it does not take away a person's chance to help.
+5. **Connect when you can't:** A request a machine cannot take on is passed to someone who can. Passing it on counts as cooperation.
+
+## 8. Try it
 
 Any maker of robots, drones, robot arms or other AI-driven machines can try YOROSIX AI today, at no cost during the evaluation period.
 
@@ -99,11 +111,11 @@ Any maker of robots, drones, robot arms or other AI-driven machines can try YORO
 
 The evaluation key works for three months. A non-binding letter of intent (LOI) is the only thing we ask in return for going further: it states interest, commits no money, and gives you first access to YOROSIX's training data as it accumulates, plus a longer trial.
 
-## 8. Research basis
+## 9. Research basis
 
 YOROSIX grows out of more than 15 years of research on cooperative behaviour and social networks, which we call Cooperative Social AI: the social decision layer that sits above a machine's physical control. More than ten manuscripts are under peer review at international journals, and several are available as preprints. They cover how help travels between people, how cooperation records become training data without exposing who did what, robot fleets that ask each other for help, and the ethics of machines that forecast or encourage human cooperation.
 
-## 9. About YOROSIX
+## 10. About YOROSIX
 
 YOROSIX is based in Osaka, Japan, and works worldwide. Its vision is a society in which people and AI-driven machines (robots, drones, vehicles, AI agents) solve problems together.
 
