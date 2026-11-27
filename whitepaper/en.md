@@ -59,7 +59,7 @@ The test is a warehouse floor of 50 m by 50 m. Robots drive at 1 m/s, use batter
 
 **What can be said now, without deployment data:** on a simulated floor with willingness drawn from real human handoff data, choosing whom to ask from a shared record of cooperation beats auctions, nearest-robot and broadcast, with fewer messages. The simulation is kinematic: it has no physics, collisions or real sensors.
 
-**What needs real fleet records:** a single fleet's measures become usable at about 200 logged requests per robot (below 30 a number means little). Comparing sites, or showing that YOROSIX AI improves a real fleet over its own baseline, needs about 2,000 to 5,000 logged requests per fleet. Gathering those records with partner fleets is the next stage.
+**What needs real fleet records:** a single fleet's measures become usable at about 200 logged requests per robot (below 30 a number means little). As a guide, stating one rate within ±5 percentage points (95% confidence) needs about 385 logged requests. Comparing sites, or showing that YOROSIX AI improves a real fleet over its own baseline, comes once those records are in. Gathering those records with partner fleets is the next stage.
 
 ## 6. Trust you can measure
 
